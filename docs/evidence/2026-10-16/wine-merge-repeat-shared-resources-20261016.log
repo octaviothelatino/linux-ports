@@ -1,0 +1,3 @@
+0144:d3d11: 3 tests executed (0 marked as todo, 0 as flaky, 0 failures), 0 skipped.
+d3d11.c:35584: Test marked todo: nt shared handle: Failed to create the nt shared handle, hr 0x80004001.
+0120:d3d11: 11 tests executed (1 marked as todo, 0 as flaky, 0 failures), 0 skipped.

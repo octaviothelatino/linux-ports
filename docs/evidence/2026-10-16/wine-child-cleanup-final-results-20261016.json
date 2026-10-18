@@ -1,0 +1,32 @@
+[
+  {
+    "run": 1,
+    "exit_code": 3,
+    "timed_out": false,
+    "bad_window": false,
+    "finished": true,
+    "color_failures": 3,
+    "elapsed_seconds": 3.74,
+    "log": "/home/octavio/Downloads/linux-ports/test-results/safety/wine-child-cleanup-final-1-20261016.log"
+  },
+  {
+    "run": 2,
+    "exit_code": 3,
+    "timed_out": false,
+    "bad_window": false,
+    "finished": true,
+    "color_failures": 3,
+    "elapsed_seconds": 3.84,
+    "log": "/home/octavio/Downloads/linux-ports/test-results/safety/wine-child-cleanup-final-2-20261016.log"
+  },
+  {
+    "run": 3,
+    "exit_code": 3,
+    "timed_out": false,
+    "bad_window": false,
+    "finished": true,
+    "color_failures": 3,
+    "elapsed_seconds": 3.84,
+    "log": "/home/octavio/Downloads/linux-ports/test-results/safety/wine-child-cleanup-final-3-20261016.log"
+  }
+]

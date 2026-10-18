@@ -1,0 +1,104 @@
+description: Byond 516 build with the Microsoft Edge Webview2 replacment for IE11(32-bit).
+game_slug: byond32
+gogslug: ''
+humblestoreid: ''
+installer_slug: byond-v5161686(32-bit)
+name: BYOND
+notes: "Requires Wine 10.5+ (may fail first time if Lutris had to install wine version).\
+  \ Servers made for versions before 515 don't work well if at all. This does allow\
+  \ TGUI to work with Wine, however older servers without TGUI may work better with\
+  \ the older installers.\r\nHere is a repo to track other common issues and guides\
+  \ for setting some things up\r\nhttps://github.com/kinggoldcatter/Wine-Byond-help"
+runner: wine
+script:
+  wine:
+    version: wine-11.14-staging-x86_64
+  files:
+  - installer: http://www.byond.com/download/build/516/516.1686_byond.exe
+  - webview2: https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/a36bf2dc-a08f-498c-a65b-0b849f365985/MicrosoftEdgeWebview2Setup.exe
+  game:
+    arch: win32
+    exe: drive_c/Program Files/BYOND/bin/byond.exe
+    prefix: $GAMEDIR
+  system:
+    env:
+      WINEDLLOVERRIDES: "d3d11=builtin;dxgi=builtin;d3d9=builtin;d3d12=builtin"
+      GDK_BACKEND: "x11"
+      SDL_VIDEODRIVER: "x11"
+      XDG_SESSION_TYPE: "x11"
+      WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS: "--disable-gpu --disable-gpu-sandbox --disable-gpu-compositing --disable-d3d11 --disable-dwm-composition --use-angle=d3d9 --disable-background-networking --disable-metrics --disable-metrics-repo --disable-crash-reporter --disable-component-update --disable-features=msEdgeMetricsReporting,msWebOOUI"
+  installer:
+  - task:
+      arch: win32
+      description: Creating prefix (may fail if Wine was just installed) you do NOT
+        need mono
+      name: create_prefix
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      app: vcrun2022
+      description: Installing vcrun2022 with Winetricks
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      app: dxtrans
+      description: Installing dxtrans with Winetricks
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      app: corefonts
+      description: Installing fonts with Winetricks
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      description: set default Wine Windows version to win7 for the prefix
+      key: Version
+      name: set_regedit
+      path: HKEY_CURRENT_USER\Software\Wine
+      prefix: $GAMEDIR
+      type: REG_SZ
+      value: win7
+  - task:
+      arch: win32
+      description: setting msedgewebview2.exe to win7
+      name: set_regedit
+      path: HKEY_CURRENT_USER\Software\Wine\AppDefaults\msedgewebview2.exe
+      prefix: $GAMEDIR
+      type: REG_SZ
+      key: version
+      value: win7
+  - task:
+      arch: win32
+      description: Installing Webview2
+      exclude_processes: MicrosoftEdgeUpdate.exe
+      executable: webview2
+      name: wineexec
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      description: Terminating MicrosoftEdgeUpdate.exe...
+      name: winekill
+      prefix: $GAMEDIR
+  - task:
+      arch: win32
+      description: Installing BYOND
+      executable: installer
+      name: wineexec
+      prefix: $GAMEDIR
+      return_code: 50944
+slug: byond-v5161686(32-bit)
+steamid: null
+version: v516.1686(32-bit)
+wine:
+  battleye: false
+  dxvk: false
+  eac: false
+  esync: false
+  fsr: false
+  fsync: false
+  version: wine-11.14-staging-x86_64
+  vkd3d: false
+year: 2003

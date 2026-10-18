@@ -1,0 +1,32 @@
+Windows Registry Editor Version 5.00
+
+; These values were absent before the October 14 font experiment.
+; Unregister and move the thirteen added font files out of Windows Fonts too.
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Fonts]
+"Arial (TrueType)"=-
+"Courier New (TrueType)"=-
+"Times New Roman (TrueType)"=-
+"Carlito (TrueType)"=-
+"Carlito Bold (TrueType)"=-
+"Carlito Italic (TrueType)"=-
+"Carlito Bold Italic (TrueType)"=-
+"Selawik (TrueType)"=-
+"Selawik Bold (TrueType)"=-
+"Selawik Light (TrueType)"=-
+"Selawik Semibold (TrueType)"=-
+"Selawik Semilight (TrueType)"=-
+"Twemoji Mozilla (TrueType)"=-
+"UberBit7 (TrueType)"=-
+"Minimal4 (TrueType)"=-
+"Ninja Naruto (TrueType)"=-
+
+[HKEY_CURRENT_USER\Software\Wine\Fonts\Replacements]
+"Calibri"=-
+"Segoe UI"=-
+"Segoe UI Emoji"=-
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]
+"Calibri"=-
+"Segoe UI"=-
+"Segoe UI Emoji"=-

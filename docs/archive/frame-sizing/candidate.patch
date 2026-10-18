@@ -1,0 +1,183 @@
+diff --git a/dlls/dcomp/dcomp_private.h b/dlls/dcomp/dcomp_private.h
+index 2e7548a4..25c06eb1 100644
+--- a/dlls/dcomp/dcomp_private.h
++++ b/dlls/dcomp/dcomp_private.h
+@@ -62,6 +62,7 @@ struct composition_target
+     LONG surface_y;
+     LONG surface_frame_x;
+     LONG surface_frame_y;
++    RECT surface_frame_content_bounds;
+     BOOL surface_position_valid;
+     BOOL surface_visible;
+     BOOL surface_frame_bounds_valid;
+@@ -71,6 +72,8 @@ struct composition_target
+     BOOL frame_geometry_valid;
+     HWND frame_root;
+     POINT frame_origin;
++    RECT frame_destination_rect;
++    RECT frame_target_rect;
+     ULONG commit_serial;
+     unsigned int source_pixel_trace_count;
+     unsigned int surface_pixel_trace_count;
+diff --git a/dlls/dcomp/device.c b/dlls/dcomp/device.c
+index d7902f39..fd1426cb 100644
+--- a/dlls/dcomp/device.c
++++ b/dlls/dcomp/device.c
+@@ -482,6 +482,8 @@ static DWORD WINAPI composite_thread_proc(void *iface)
+         {
+             HWND destination, root;
+             POINT offset;
++            RECT destination_rect = {0}, target_rect = {0};
++            BOOL geometry_valid;
+ 
+             if (!target->root)
+                 continue;
+@@ -492,10 +494,15 @@ static DWORD WINAPI composite_thread_proc(void *iface)
+             destination = get_composition_destination(target->hwnd, &offset);
+             root = GetAncestor(destination, GA_ROOT);
+             MapWindowPoints(destination, root, &offset, 1);
++            geometry_valid = GetClientRect(destination, &destination_rect)
++                    && GetClientRect(target->hwnd, &target_rect);
+             if (target->frame_geometry_valid && target->surface_visible && target->surface_published_valid
++                    && geometry_valid
+                     && IsWindowVisible(destination) && IsWindowVisible(target->surface)
+                     && target->frame_root == root
+                     && target->frame_origin.x == offset.x && target->frame_origin.y == offset.y
++                    && EqualRect(&target->frame_destination_rect, &destination_rect)
++                    && EqualRect(&target->frame_target_rect, &target_rect)
+                     && target->commit_serial == device->commit_serial && !visual_tree_changed(visual))
+             {
+                 ++count;
+@@ -510,9 +517,11 @@ static DWORD WINAPI composite_thread_proc(void *iface)
+             count += composite_visual_tree(target, visual, 0.0f, 0.0f);
+             if (target_present_surface_frame(target, destination))
+             {
+-                target->frame_geometry_valid = TRUE;
++                target->frame_geometry_valid = geometry_valid;
+                 target->frame_root = root;
+                 target->frame_origin = offset;
++                target->frame_destination_rect = destination_rect;
++                target->frame_target_rect = target_rect;
+                 target->commit_serial = device->commit_serial;
+             }
+         }
+diff --git a/dlls/dcomp/target.c b/dlls/dcomp/target.c
+index 51a8e7fb..8b14417f 100644
+--- a/dlls/dcomp/target.c
++++ b/dlls/dcomp/target.c
+@@ -166,6 +166,8 @@ BOOL target_update_surface(struct composition_target *target, HWND parent, const
+     target->surface_frame_x = root_position.x;
+     target->surface_frame_y = root_position.y;
+     target->surface_frame_bounds_valid = TRUE;
++    SetRect(&target->surface_frame_content_bounds, root_position.x, root_position.y,
++            root_position.x + width, root_position.y + height);
+     visible = IsWindowVisible(parent);
+     if (state_trace_count < 256)
+     {
+@@ -315,7 +317,7 @@ static BOOL target_resize_surface_bitmap(struct composition_target *target, LONG
+     HBITMAP bitmap;
+     HGDIOBJ old_bitmap;
+     void *bits;
+-    UINT y;
++    LONG y;
+ 
+     dc = CreateCompatibleDC(NULL);
+     if (!dc)
+@@ -344,13 +346,18 @@ static BOOL target_resize_surface_bitmap(struct composition_target *target, LONG
+     memset(bits, 0, (size_t)width * height * 4);
+     if (preserve && target->surface_bits)
+     {
+-        LONG x_offset = target->surface_frame_x - left;
+-        LONG y_offset = target->surface_frame_y - top;
++        RECT old_bounds, new_bounds, overlap;
+ 
+-        for (y = 0; y < target->surface_height; ++y)
+-            memcpy((BYTE *)bits + ((size_t)(y_offset + y) * width + x_offset) * 4,
+-                    (BYTE *)target->surface_bits + (size_t)y * target->surface_width * 4,
+-                    (size_t)target->surface_width * 4);
++        SetRect(&old_bounds, target->surface_frame_x, target->surface_frame_y,
++                target->surface_frame_x + target->surface_width,
++                target->surface_frame_y + target->surface_height);
++        SetRect(&new_bounds, left, top, left + width, top + height);
++        if (IntersectRect(&overlap, &old_bounds, &new_bounds))
++            for (y = overlap.top; y < overlap.bottom; ++y)
++                memcpy((BYTE *)bits + ((size_t)(y - top) * width + overlap.left - left) * 4,
++                        (BYTE *)target->surface_bits + ((size_t)(y - old_bounds.top)
++                        * target->surface_width + overlap.left - old_bounds.left) * 4,
++                        (size_t)(overlap.right - overlap.left) * 4);
+     }
+ 
+     if (target->surface_dc && target->surface_old_bitmap)
+@@ -380,6 +387,7 @@ void target_begin_surface_frame(struct composition_target *target, HWND parent)
+ 
+     target->surface_frame_active = FALSE;
+     target->surface_frame_has_content = FALSE;
++    SetRectEmpty(&target->surface_frame_content_bounds);
+     if (!parent || !IsWindow(parent))
+         return;
+ 
+@@ -410,6 +418,7 @@ BOOL target_composite_surface(struct composition_target *target, HWND parent, co
+ {
+     HWND root;
+     POINT root_position;
++    RECT content_bounds;
+     LONG left, top, right, bottom;
+     UINT x, y;
+ 
+@@ -490,6 +499,13 @@ BOOL target_composite_surface(struct composition_target *target, HWND parent, co
+         }
+     }
+ 
++    SetRect(&content_bounds, root_position.x, root_position.y,
++            root_position.x + width, root_position.y + height);
++    if (target->surface_frame_has_content)
++        UnionRect(&target->surface_frame_content_bounds,
++                &target->surface_frame_content_bounds, &content_bounds);
++    else
++        target->surface_frame_content_bounds = content_bounds;
+     target->surface_frame_has_content = TRUE;
+     return TRUE;
+ }
+@@ -498,11 +514,12 @@ BOOL target_present_surface_frame(struct composition_target *target, HWND parent
+ {
+     BLENDFUNCTION blend = {AC_SRC_OVER, 0, 255, AC_SRC_ALPHA};
+     POINT source = {0, 0};
+-    POINT position = {target->surface_frame_x, target->surface_frame_y};
+-    SIZE size = {(LONG)target->surface_width, (LONG)target->surface_height};
++    POINT position;
++    SIZE size;
++    RECT *bounds = &target->surface_frame_content_bounds;
+     BOOL geometry_changed;
+     BOOL frame_changed;
+-    SIZE_T frame_size = (SIZE_T)target->surface_width * target->surface_height * 4;
++    SIZE_T frame_size;
+ 
+     if (!target->surface_frame_active)
+         return FALSE;
+@@ -522,6 +539,26 @@ BOOL target_present_surface_frame(struct composition_target *target, HWND parent
+     if (!target->surface_frame_has_content || !target->surface || !target->surface_bits)
+         return FALSE;
+ 
++    /* Keep every visual in this frame, but do not retain the bounds of old
++     * frames after a visual moves, shrinks, or is removed. Crop only once,
++     * after the complete visual tree has been blended. */
++    if (target->surface_frame_x != bounds->left || target->surface_frame_y != bounds->top
++            || target->surface_width != bounds->right - bounds->left
++            || target->surface_height != bounds->bottom - bounds->top)
++    {
++        TRACE("Cropping composition frame %p from %ld,%ld %ux%u to %s.\n",
++                target->hwnd, target->surface_frame_x, target->surface_frame_y,
++                target->surface_width, target->surface_height, wine_dbgstr_rect(bounds));
++        if (!target_resize_surface_bitmap(target, bounds->left, bounds->top,
++                bounds->right - bounds->left, bounds->bottom - bounds->top, TRUE))
++            return FALSE;
++    }
++    position.x = target->surface_frame_x;
++    position.y = target->surface_frame_y;
++    size.cx = target->surface_width;
++    size.cy = target->surface_height;
++    frame_size = (SIZE_T)target->surface_width * target->surface_height * 4;
++
+     geometry_changed = !target->surface_position_valid || !target->surface_visible
+             || target->surface_x != position.x || target->surface_y != position.y
+             || !IsWindowVisible(target->surface);

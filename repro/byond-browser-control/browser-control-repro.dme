@@ -1,0 +1,3 @@
+#include "browser-control-repro.dm"
+#include "browser-control-repro.dmf"
+#include "browser-control-repro.dmm"

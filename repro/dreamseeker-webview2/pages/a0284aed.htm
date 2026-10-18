@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HTML A — main WebView2 surface — should remain stable</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: transparent; color: rgba(245,245,245,.85); font: 12px sans-serif; }
+    .topbar {
+      position: fixed; left: 0; right: 0; top: 0; height: 30px;
+      display: flex; align-items: center; padding: 0 12px;
+      background: rgba(10, 18, 28, .72); border-bottom: 1px solid rgba(255,255,255,.18);
+      pointer-events: auto;
+    }
+    .title { flex: 1; letter-spacing: .08em; }
+    .tool { color: rgba(245,245,245,.78); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.22); border-radius: 3px; padding: 3px 9px; }
+    .left-panel {
+      position: fixed; left: 14px; top: 48px; width: 180px; padding: 10px;
+      background: rgba(10,18,28,.62); border: 1px solid rgba(255,255,255,.16);
+      border-radius: 4px; pointer-events: auto;
+    }
+    .row { height: 21px; display: flex; align-items: center; justify-content: space-between; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #7bc47f; }
+  </style>
+</head>
+<body>
+  <div class="topbar"><span class="title">HTML A — MAIN WEBVIEW2 SURFACE — SHOULD REMAIN STABLE</span><button class="tool">MENU</button></div>
+  <div class="left-panel">
+    <div class="row"><span>Map</span><span class="dot"></span></div>
+    <div class="row"><span>Chat</span><span class="dot"></span></div>
+    <div class="row"><span>Inventory</span><span class="dot"></span></div>
+  </div>
+  <script>
+    let moves = 0;
+    window.addEventListener('pointermove', function () {
+      moves++;
+      if (moves === 1 || moves % 10 === 0)
+        document.title = 'HTML A — hover events=' + moves + ' — should remain stable';
+    }, { passive: true });
+  </script>
+</body>
+</html>

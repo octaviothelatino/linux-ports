@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HTML B — interactive WebView2 surface — hover target</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: transparent; color: #e7d8c4; font: 12px sans-serif; }
+    .panel {
+      position: absolute; left: 50%; top: 50%; width: 274px; min-height: 214px;
+      transform: translate(-50%, -50%); padding: 18px;
+      background: rgba(49, 35, 27, .93); border: 1px solid #b88635; border-radius: 5px;
+      box-shadow: 0 7px 22px rgba(0,0,0,.48);
+    }
+    h1 { margin: 0 0 14px; color: #f1c56b; font-size: 15px; font-weight: 600; text-align: center; }
+    .choice {
+      display: block; width: 100%; margin: 8px 0; padding: 9px 0;
+      color: #edcf92; background: rgba(111, 61, 22, .48);
+      border: 1px solid rgba(184,134,53,.78); border-radius: 3px;
+      font: inherit; cursor: pointer;
+      transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .choice:hover { background: rgba(141, 78, 27, .72); border-color: #e4b451; box-shadow: 0 0 8px rgba(228,180,81,.24); }
+    .choice:active { background: rgba(96, 48, 17, .74); }
+    .hint { margin-top: 15px; color: #ad9676; text-align: center; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <section class="panel">
+    <h1>HTML B — EMBEDDED WEBVIEW2 PANEL<br><small>HOVER TARGET — SHOULD REMAIN STABLE</small></h1>
+    <button class="choice">OPEN INVENTORY</button>
+    <button class="choice">OPEN EQUIPMENT</button>
+    <button class="choice">OPEN SETTINGS</button>
+    <div class="hint">Move across the controls repeatedly.<br>This is HTML, not the D3D9 map.</div>
+  </section>
+  <script>
+    let moves = 0;
+    window.addEventListener('pointermove', function () {
+      moves++;
+      if (moves === 1 || moves % 10 === 0)
+        document.title = 'HTML B — hover events=' + moves + ' — should remain stable';
+    }, { passive: true });
+  </script>
+</body>
+</html>

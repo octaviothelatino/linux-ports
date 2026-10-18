@@ -1,0 +1,32 @@
+Windows Registry Editor Version 5.00
+
+; Appearance-only configuration for the isolated BYOND test prefix.
+; Install the named font files first. No Wine rendering settings are changed.
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Fonts]
+"Arial (TrueType)"="arial.ttf"
+"Courier New (TrueType)"="cour.ttf"
+"Times New Roman (TrueType)"="times.ttf"
+"Carlito (TrueType)"="Carlito-Regular.ttf"
+"Carlito Bold (TrueType)"="Carlito-Bold.ttf"
+"Carlito Italic (TrueType)"="Carlito-Italic.ttf"
+"Carlito Bold Italic (TrueType)"="Carlito-BoldItalic.ttf"
+"Selawik (TrueType)"="selawk.ttf"
+"Selawik Bold (TrueType)"="selawkb.ttf"
+"Selawik Light (TrueType)"="selawkl.ttf"
+"Selawik Semibold (TrueType)"="selawksb.ttf"
+"Selawik Semilight (TrueType)"="selawksl.ttf"
+"Twemoji Mozilla (TrueType)"="TwemojiMozilla.ttf"
+"UberBit7 (TrueType)"="UberBit7.ttf"
+"Minimal4 (TrueType)"="Minimal4.ttf"
+"Ninja Naruto (TrueType)"="Ninja Naruto.ttf"
+
+[HKEY_CURRENT_USER\Software\Wine\Fonts\Replacements]
+"Calibri"="Carlito"
+"Segoe UI"="Selawik"
+"Segoe UI Emoji"="Twemoji Mozilla"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]
+"Calibri"="Carlito"
+"Segoe UI"="Selawik"
+"Segoe UI Emoji"="Twemoji Mozilla"

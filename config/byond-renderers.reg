@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Wine]
+"Version"="win10"
+
+[HKEY_CURRENT_USER\Software\Wine\AppDefaults\byond.exe]
+"Version"="win10"
+
+[HKEY_CURRENT_USER\Software\Wine\AppDefaults\dreamseeker.exe]
+"Version"="win10"
+
+[HKEY_CURRENT_USER\Software\Wine\AppDefaults\dreamseeker.exe\Direct3D]
+"renderer"="gl"
+
+[HKEY_CURRENT_USER\Software\Wine\AppDefaults\msedgewebview2.exe]
+"Version"="win10"
+
+[HKEY_CURRENT_USER\Software\Wine\AppDefaults\msedgewebview2.exe\Direct3D]
+"renderer"="vulkan"

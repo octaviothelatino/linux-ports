@@ -1,0 +1,216 @@
+Function "XDestroyWindow" not defined.
+Breakpoint 1 (XDestroyWindow) pending.
+Function "_XDefaultError" not defined.
+Breakpoint 2 (_XDefaultError) pending.
+ERROR: ld.so: object '/usr/lib/i386-linux-gnu/libX11.so.6' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS32): ignored.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[Detaching after vfork from child process 3531240]
+[Detaching after fork from child process 3531242]
+NATIVE DESTROY display=0x56672da0 window=0x3000002
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5669f7a0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x1005a) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x1005a) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=hwnd@entry=0x1005a, winevent=winevent@entry=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0x7eeec34e in NtUserDestroyWindow (hwnd=0x1005a) at ../wine-upstream/dlls/win32u/window.c:5638
+#6  0x7ee52270 in unregister_imm_window (hwnd=0x10056) at ../wine-upstream/dlls/win32u/imm.c:332
+#7  0x7eeebca9 in destroy_window (hwnd=0x10056) at ../wine-upstream/dlls/win32u/window.c:5489
+#8  0x7eeec24c in user_destroy_window (hwnd=0x10056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#9  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#10 0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#11 0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+NATIVE DESTROY display=0x5656ad20 window=0x3200015
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39e0e in destroy_client_window (hwnd=0x0, client_window=52428821) at ../wine-upstream/dlls/winex11.drv/window.c:2462
+#2  0x7ea229d2 in x11drv_client_surface_destroy (client=0x566397e0) at ../wine-upstream/dlls/winex11.drv/init.c:272
+#3  0x7eedafc0 in client_surface_release_locked (surface=0x566397e0) at ../wine-upstream/dlls/win32u/window.c:316
+#4  0x7eedbbdd in detach_client_surfaces (hwnd=0x10056) at ../wine-upstream/dlls/win32u/window.c:330
+#5  0x7eeebe7f in destroy_window (hwnd=0x10056) at ../wine-upstream/dlls/win32u/window.c:5546
+#6  0x7eeec24c in user_destroy_window (hwnd=0x10056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#7  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#8  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#9  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#10 __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#11 0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000001
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5658aad0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x10056) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x10056) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=0x10056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#6  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#7  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#8  __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#9  0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000004
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5669f7a0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x2005a) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x2005a) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=hwnd@entry=0x2005a, winevent=winevent@entry=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0x7eeec34e in NtUserDestroyWindow (hwnd=0x2005a) at ../wine-upstream/dlls/win32u/window.c:5638
+#6  0x7ee52270 in unregister_imm_window (hwnd=0x20056) at ../wine-upstream/dlls/win32u/imm.c:332
+#7  0x7eeebca9 in destroy_window (hwnd=0x20056) at ../wine-upstream/dlls/win32u/window.c:5489
+#8  0x7eeec24c in user_destroy_window (hwnd=0x20056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#9  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#10 0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#11 0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+NATIVE DESTROY display=0x5656ad20 window=0x320002b
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39e0e in destroy_client_window (hwnd=0x0, client_window=52428843) at ../wine-upstream/dlls/winex11.drv/window.c:2462
+#2  0x7ea229d2 in x11drv_client_surface_destroy (client=0x56660720) at ../wine-upstream/dlls/winex11.drv/init.c:272
+#3  0x7eedafc0 in client_surface_release_locked (surface=0x56660720) at ../wine-upstream/dlls/win32u/window.c:316
+#4  0x7eedbbdd in detach_client_surfaces (hwnd=0x20056) at ../wine-upstream/dlls/win32u/window.c:330
+#5  0x7eeebe7f in destroy_window (hwnd=0x20056) at ../wine-upstream/dlls/win32u/window.c:5546
+#6  0x7eeec24c in user_destroy_window (hwnd=0x20056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#7  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#8  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#9  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#10 __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#11 0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000003
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5658aad0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x20056) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x20056) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=0x20056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#6  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#7  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#8  __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#9  0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000006
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5669f7a0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x3005a) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x3005a) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=hwnd@entry=0x3005a, winevent=winevent@entry=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0x7eeec34e in NtUserDestroyWindow (hwnd=0x3005a) at ../wine-upstream/dlls/win32u/window.c:5638
+#6  0x7ee52270 in unregister_imm_window (hwnd=0x30056) at ../wine-upstream/dlls/win32u/imm.c:332
+#7  0x7eeebca9 in destroy_window (hwnd=0x30056) at ../wine-upstream/dlls/win32u/window.c:5489
+#8  0x7eeec24c in user_destroy_window (hwnd=0x30056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#9  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#10 0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#11 0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+NATIVE DESTROY display=0x5656ad20 window=0x3200040
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39e0e in destroy_client_window (hwnd=0x0, client_window=52428864) at ../wine-upstream/dlls/winex11.drv/window.c:2462
+#2  0x7ea229d2 in x11drv_client_surface_destroy (client=0x56660720) at ../wine-upstream/dlls/winex11.drv/init.c:272
+#3  0x7eedafc0 in client_surface_release_locked (surface=0x56660720) at ../wine-upstream/dlls/win32u/window.c:316
+#4  0x7eedbbdd in detach_client_surfaces (hwnd=0x30056) at ../wine-upstream/dlls/win32u/window.c:330
+#5  0x7eeebe7f in destroy_window (hwnd=0x30056) at ../wine-upstream/dlls/win32u/window.c:5546
+#6  0x7eeec24c in user_destroy_window (hwnd=0x30056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#7  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#8  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#9  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#10 __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#11 0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000005
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5658aad0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x30056) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x30056) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=0x30056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#6  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#7  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#8  __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#9  0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000008
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5669f7a0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x4005a) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x4005a) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=hwnd@entry=0x4005a, winevent=winevent@entry=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0x7eeec34e in NtUserDestroyWindow (hwnd=0x4005a) at ../wine-upstream/dlls/win32u/window.c:5638
+#6  0x7ee52270 in unregister_imm_window (hwnd=0x40056) at ../wine-upstream/dlls/win32u/imm.c:332
+#7  0x7eeebca9 in destroy_window (hwnd=0x40056) at ../wine-upstream/dlls/win32u/window.c:5489
+#8  0x7eeec24c in user_destroy_window (hwnd=0x40056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#9  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#10 0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#11 0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+NATIVE DESTROY display=0x5656ad20 window=0x3200055
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39e0e in destroy_client_window (hwnd=0x0, client_window=52428885) at ../wine-upstream/dlls/winex11.drv/window.c:2462
+#2  0x7ea229d2 in x11drv_client_surface_destroy (client=0x56660720) at ../wine-upstream/dlls/winex11.drv/init.c:272
+#3  0x7eedafc0 in client_surface_release_locked (surface=0x56660720) at ../wine-upstream/dlls/win32u/window.c:316
+#4  0x7eedbbdd in detach_client_surfaces (hwnd=0x40056) at ../wine-upstream/dlls/win32u/window.c:330
+#5  0x7eeebe7f in destroy_window (hwnd=0x40056) at ../wine-upstream/dlls/win32u/window.c:5546
+#6  0x7eeec24c in user_destroy_window (hwnd=0x40056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#7  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#8  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#9  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#10 __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#11 0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+NATIVE DESTROY display=0x56672da0 window=0x3000007
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5658aad0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x40056) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x40056) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=0x40056, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#6  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#7  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#8  __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#9  0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+dcomp.c:698: Test failed: Expected color 0xff00, got 000000.
+dcomp.c:707: Test failed: Expected color 0x00ff, got 000000.
+dcomp.c:712: Test failed: Expected color 0xff0000, got 000000.
+NATIVE DESTROY display=0x56672da0 window=0x300000c
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x5672b6f0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x10060) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eeebec6 in destroy_window (hwnd=0x10060) at ../wine-upstream/dlls/win32u/window.c:5549
+#4  0x7eeec24c in user_destroy_window (hwnd=0x10060, winevent=1) at ../wine-upstream/dlls/win32u/window.c:5632
+#5  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#6  0xf7b3bd8f in server_init_process_done () at ../wine-upstream/dlls/ntdll/unix/server.c:1771
+#7  0xf7b2ba5b in start_main_thread () at ../wine-upstream/dlls/ntdll/unix/loader.c:1869
+#8  __wine_main (argc=<optimized out>, argv=<optimized out>) at ../wine-upstream/dlls/ntdll/unix/loader.c:2125
+#9  0x56556432 in main (argc=3, argv=0xffffd004) at ../wine-upstream/tools/wine/wine.c:70
+[Switching to Thread 0x2c1fb40 (LWP 3531345)]
+NATIVE DESTROY display=0x78d00d00 window=0x5600002
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x78d8b7e0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x10072) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eee200a in destroy_thread_windows () at ../wine-upstream/dlls/win32u/window.c:5711
+#4  0x7eeb3a94 in thread_detach () at ../wine-upstream/dlls/win32u/sysparams.c:7567
+#5  NtUserCallNoParam (code=8) at ../wine-upstream/dlls/win32u/sysparams.c:7628
+#6  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#7  0xf7b3bf99 in server_init_thread (data=0x2b10000) at ../wine-upstream/dlls/ntdll/unix/server.c:1805
+#8  0xf7c97781 in ?? () from /lib/i386-linux-gnu/libc.so.6
+#9  0xf7d2de78 in ?? () from /lib/i386-linux-gnu/libc.so.6
+NATIVE DESTROY display=0x78d00d00 window=0x5600001
+#0  0xf7e823e0 in XDestroyWindow () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea39c25 in destroy_whole_window (data=data@entry=0x78d8a5a0, already_destroyed=already_destroyed@entry=0) at ../wine-upstream/dlls/winex11.drv/window.c:2625
+#2  0x7ea3a1cb in X11DRV_DestroyWindow (hwnd=0x1006e) at ../wine-upstream/dlls/winex11.drv/window.c:2758
+#3  0x7eee200a in destroy_thread_windows () at ../wine-upstream/dlls/win32u/window.c:5711
+#4  0x7eeb3a94 in thread_detach () at ../wine-upstream/dlls/win32u/sysparams.c:7567
+#5  NtUserCallNoParam (code=8) at ../wine-upstream/dlls/win32u/sysparams.c:7628
+#6  0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#7  0xf7b3bf99 in server_init_thread (data=0x2b10000) at ../wine-upstream/dlls/ntdll/unix/server.c:1805
+#8  0xf7c97781 in ?? () from /lib/i386-linux-gnu/libc.so.6
+#9  0xf7d2de78 in ?? () from /lib/i386-linux-gnu/libc.so.6
+DEFAULT X11 ERROR
+#0  0xf7ea78e0 in _XDefaultError () from /usr/lib/i386-linux-gnu/libX11.so.6
+#1  0x7ea430fc in error_handler (display=0x78d00d00, error_evt=0x2c1ecac) at ../wine-upstream/dlls/winex11.drv/x11drv_main.c:294
+#2  0xf7ea7a58 in _XError () from /usr/lib/i386-linux-gnu/libX11.so.6
+#3  0xf7ea45cc in ?? () from /usr/lib/i386-linux-gnu/libX11.so.6
+#4  0xf7ea4697 in ?? () from /usr/lib/i386-linux-gnu/libX11.so.6
+#5  0xf7ea5854 in _XReply () from /usr/lib/i386-linux-gnu/libX11.so.6
+#6  0xf7ea085e in XSync () from /usr/lib/i386-linux-gnu/libX11.so.6
+#7  0xf7e7ff6f in XCloseDisplay () from /usr/lib/i386-linux-gnu/libX11.so.6
+#8  0x7ea46cc9 in X11DRV_ThreadDetach () at ../wine-upstream/dlls/winex11.drv/x11drv_main.c:700
+#9  0x7eeb3aa7 in thread_detach () at ../wine-upstream/dlls/win32u/sysparams.c:7569
+#10 NtUserCallNoParam (code=8) at ../wine-upstream/dlls/win32u/sysparams.c:7628
+#11 0xf7b3da03 in __wine_syscall_dispatcher () from /home/octavio/Downloads/wine-build-upstream32/tools/wine/../../dlls/ntdll/ntdll.so
+#12 0xf7b3bf99 in server_init_thread (data=0x2b10000) at ../wine-upstream/dlls/ntdll/unix/server.c:1805
+#13 0xf7c97781 in ?? () from /lib/i386-linux-gnu/libc.so.6
+#14 0xf7d2de78 in ?? () from /lib/i386-linux-gnu/libc.so.6
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  4 (X_DestroyWindow)
+  Resource id in failed request:  0x5600001
+  Serial number of failed request:  123
+  Current serial number in output stream:  128
+[Inferior 1 (process 3531237) exited with code 01]

@@ -1,0 +1,5 @@
+# The project repository stores notes and launch configuration.
+# Generated runtime data lives beside the project.
+/byond32-upstream-baseline/
+/test-results/
+/__pycache__/

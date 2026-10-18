@@ -1,0 +1,4 @@
+dcomp.c:698: Test failed: Expected color 0xff00, got 000000.
+dcomp.c:707: Test failed: Expected color 0x00ff, got 000000.
+dcomp.c:712: Test failed: Expected color 0xff0000, got 000000.
+0020:dcomp: 116 tests executed (0 marked as todo, 0 as flaky, 3 failures), 0 skipped.

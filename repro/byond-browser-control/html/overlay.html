@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HudLib-style dynamic HTML browser surface</title>
+  <script>
+    // Diagnostic only: prove that the dynamic BROWSER document reached
+    // DOMContentLoaded. This does not draw, animate, or simulate flicker.
+    function reportOverlayDomLoaded() {
+      if (window.BYOND && BYOND.winset) {
+        BYOND.winset("reprowindow", {
+          "title": "BYOND HudLib | OVERLAY_DOM_LOADED | overlay.html"
+        });
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", reportOverlayDomLoaded, { once: true });
+    } else {
+      reportOverlayDomLoaded();
+    }
+  </script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: transparent;
+      color: #ead4ad;
+      font-family: Georgia, serif;
+    }
+
+    .surface-label {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      padding: 6px 10px;
+      color: #d8e8ee;
+      background: rgba(20, 28, 34, 0.72);
+      border: 1px solid rgba(194, 221, 231, 0.5);
+      font: italic 14px sans-serif;
+    }
+
+    .panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 360px;
+      transform: translate(-50%, -50%);
+      padding: 24px 26px 20px;
+      text-align: center;
+      background: rgba(57, 42, 35, 0.97);
+      border: 1px solid #b47a25;
+      border-radius: 5px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: #ffd06d;
+      font: bold 20px sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      margin: 8px 0 18px;
+      color: #d7c0a2;
+      font: italic 14px sans-serif;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin: 9px 0;
+      padding: 10px;
+      color: #f5d18c;
+      background: #624020;
+      border: 1px solid #b47a25;
+      border-radius: 3px;
+      cursor: pointer;
+      font: italic 15px sans-serif;
+    }
+
+    button:hover {
+      color: #fff4d6;
+      background: #9a5725;
+      box-shadow: 0 0 8px rgba(255, 196, 87, 0.55);
+    }
+
+    button:active {
+      background: #c0712d;
+    }
+
+    #state {
+      min-height: 18px;
+      margin-top: 14px;
+      color: #e7c27a;
+      font: 13px sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="surface-label">HUDLIB PATH: dynamic browser moved over native map</div>
+  <main class="panel">
+    <h1>HTML B — HUDLIB-STYLE BROWSER</h1>
+    <p>This surface is created at runtime, resized, focused, and placed over the native map. Hover the controls repeatedly.</p>
+    <button type="button">OPEN INVENTORY</button>
+    <button type="button">OPEN EQUIPMENT</button>
+    <button type="button">OPEN SETTINGS</button>
+    <div id="state">Hover events: 0</div>
+  </main>
+  <script>
+    let hoverEvents = 0;
+    const state = document.getElementById('state');
+    for (const control of document.querySelectorAll('button')) {
+      control.addEventListener('mouseenter', () => {
+        hoverEvents += 1;
+        state.textContent = `Hover events: ${hoverEvents}`;
+      });
+    }
+  </script>
+</body>
+</html>

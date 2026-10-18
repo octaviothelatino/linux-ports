@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HudLib map browser positioning surface</title>
+  <script>
+    // This is the relevant part of HudLib Widget Pack Basic's TextInput
+    // implementation. The hidden browser receives a screen coordinate from
+    // DM and asks BYOND to move the transient browser over the map.
+    function screenloc(string, icon_size) {
+      let items = string.split(/[:,]/);
+      return {"x": (parseInt(items[0]) - 1) * icon_size + (parseInt(items[1]) - 1),
+              "y": (parseInt(items[2]) - 1) * icon_size + (parseInt(items[3]) - 1)};
+    }
+
+    function sizestr(string) {
+      let items = string.split(/[x,]/);
+      return {"x": parseInt(items[0]), "y": parseInt(items[1])};
+    }
+
+    function onTextInput(screen, handle, size, view, icon_size, field_id, style, content) {
+      icon_size = parseInt(icon_size);
+      screen = screenloc(screen, icon_size);
+      handle = sizestr(handle);
+      view = sizestr(view);
+      size = sizestr(size);
+
+      let wndx = (view.x * icon_size - window.innerWidth) / -2 + screen.x - handle.x;
+      let wndy = (view.y * icon_size - window.innerHeight) / 2 + window.innerHeight - screen.y - size.y + handle.y;
+
+      BYOND.winset("reprowindow", {
+        "title": "BYOND HudLib | JS_HANDOFF_RECEIVED | target=" + size.x + "x" + size.y
+      });
+      BYOND.winset("reprowindow.hudinput", {
+        "pos": `${wndx},${wndy}`,
+        "size": `${size.x}x${size.y}`,
+        "is-visible": "true",
+        "focus": "true"
+      });
+      BYOND.winset("reprowindow", {
+        "title": "BYOND HudLib | JS_WINSET_SENT | target=" + size.x + "x" + size.y
+      });
+    }
+  </script>
+</head>
+<body></body>
+</html>
